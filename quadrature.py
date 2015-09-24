@@ -23,7 +23,7 @@ class QuadratureEstimator:
             #declares the direction of travel is forwards
             direction = "+"
             #declares the location of each pulse
-            if (a_state, a_state_old, b_state) == (1,0,0)
+            if (a_state, a_state_old, b_state) == (1,0,0):
               pulcount = pulcount + 1
             #calculates the velocity
             vel = (((pulcount/ticks_per_revolution) * 60)/(time - time_old))
@@ -32,17 +32,17 @@ class QuadratureEstimator:
             #declares the direction of travel is reverse
             direction = "-"
             #declares the location of each pulse
-            if (a_state, a_state_old, b_state) == (1,0,0)
+            if (a_state, a_state_old, b_state) == (1,0,0):
               pulcount = pulcount + 1
             #calculates the velocity
             vel = (((pulcount/ticks_per_revolution) * 60)/(time - time_old))
-          else 
+          else:
             #stores the values for when there is no pulse or seperate tic
             trash = trash + 1
           #sets the current states as the old states
           a_state = a_state_old
           b_state = b_state_old
-        else
+        else:
           time = time_old
           count = count + 1
           a_state = a_state_old
