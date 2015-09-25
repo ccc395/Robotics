@@ -7,22 +7,20 @@ import sys
 import quadrature
 
 
-def change():
-    rospy.init_node('change', anonymous=True)
-
-    rospy.Subscriber("/ticks", Bool, change)
-    
+def change(data):    
 #    std_msgs/Bool state_a
 #    std_msgs/Bool state_b    
     a_state = Bool state_a.data
     b_state = Bool state_b.data
     data = guadrature.update(a_state, b_state)
-
-
+def mynode():
+    rospy.init_node('mynode', anonymous=True)
+    #subscribes to the "ticks" topic for the Bool type (boolean) and executes change function
+    rospy.Subscriber("/ticks", Bool, change)
     pub = rospy.Publisher('/joint_out', JointState, queue_size=10) # The queue for display
     rate = rospy.Rate(10) 
     while not rospy.is_shutdown():
-        joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (self._velocity, self._position)
+        joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (quadrature._velocity, quadrature._position)
         pub.publish(joint_out)
         rate.sleep()
         rospy.spin()
