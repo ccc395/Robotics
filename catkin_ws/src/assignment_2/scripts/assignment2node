@@ -7,10 +7,45 @@ from std_msgs.msg import msg.state_b.data
 import sys
 
 
-def change(data):
+def change():
     
     #self._velocity = direction + vel
     #position = velocity * time
+    while True
+      #sets up where the initial velocity and position is not calculated as it cannot be
+        if count != 0:
+          #if moving forward
+          if ((a_state, b_state_old) == (1,0)) or ((a_state,b_state_old) ==(0,1)):
+            #declares the direction of travel is forwards
+            direction = "+"
+            #declares the location of each pulse
+            if (a_state, a_state_old, b_state) == (1,0,0):
+              pulcount = pulcount + 1
+            #calculates the velocity
+            vel = (((pulcount/ticks_per_revolution) * 60)/(time - time_old))
+          #if moving backward
+          elif((a_state,b_state_old == (1,1))) or ((a_state,b_state_old) == (0,0)):
+            #declares the direction of travel is reverse
+            direction = "-"
+            #declares the location of each pulse
+            if (a_state, a_state_old, b_state) == (1,0,0):
+              pulcount = pulcount + 1
+            #calculates the velocity
+            vel = (((pulcount/ticks_per_revolution) * 60)/(time - time_old))
+          else:
+            #stores the values for when there is no pulse or seperate tic
+            trash = trash + 1
+          #sets the current states as the old states
+          a_state = a_state_old
+          b_state = b_state_old
+        else:
+          time = time_old
+          count = count + 1
+          a_state = a_state_old
+          b_state = b_state_old      
+        self._velocity = direction + vel
+        self._position = velocity * time
+
     rospy.loginfo(rospy.get_caller_id() + "what I heard is %s", data.data)
     Header header
     std_msgs/Bool state_a
@@ -36,6 +71,23 @@ def listener():
 
 if __name__ == '__main__':
     listener()
+
+def talker():
+    pub = rospy.Publisher('/joint_out', JointState, queue_size=10) # The queue for display
+    rospy.init_node('talker', anonymous=True) #name of the node
+    rate = rospy.Rate(10) 
+    while not rospy.is_shutdown():
+        joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (velocity, position)
+        rospy.loginfo(joint_out)
+        pub.publish(joint_out)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+
 
 #!/usr/bin/env python
 #import rospy
