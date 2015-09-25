@@ -48,7 +48,7 @@ class QuadratureEstimator:
           a_state = a_state_old
           b_state = b_state_old      
         self._velocity = direction + vel
-        position = velocity * time
+        self._position = velocity * time
 
   @property
   def position(self):
