@@ -9,17 +9,23 @@ import quadrature
 
 def change(data):    
 #    std_msgs/Bool state_a
-#    std_msgs/Bool state_b    
+#    std_msgs/Bool state_b     << as defined in khan_msgs
     a_state = Bool state_a.data
     b_state = Bool state_b.data
-    data = guadrature.update(a_state, b_state)
+    # calculates the position and velocity using the quadrature.py file
+    quadrature.update(a_state, b_state)
 def mynode():
     rospy.init_node('mynode', anonymous=True)
     #subscribes to the "ticks" topic for the Bool type (boolean) and executes change function
     rospy.Subscriber("/ticks", Bool, change)
+    #publishes to joint_out of type JointState
     pub = rospy.Publisher('/joint_out', JointState, queue_size=10) # The queue for display
     rate = rospy.Rate(10) 
     while not rospy.is_shutdown():
+        #will publish:
+        #Velocity: -- (some number)
+        #Position: -- (some number)
+        #where the velocity and position numbers are determined by the quadrature values quadrature._velocity and quadrature._position
         joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (quadrature._velocity, quadrature._position)
         pub.publish(joint_out)
         rate.sleep()
@@ -30,64 +36,3 @@ if __name__ == '__main__':
     except rospy.ROSInterruptException:
         pass
 
-#def listener():
-
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # node are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
-#    rospy.init_node('listener', anonymous=True)
-
-#    rospy.Subscriber("/ticks", Bool, change)
-#        joint_out = "hello world %s" % rospy.get_time()
-#        rospy.loginfo(joint_out)
-#        pub.publish(joint_out)
-#        rate.sleep()
-
-    # spin() simply keeps python from exiting until this node is stopped
-#    rospy.spin()
-
-#if __name__ == '__main__':
-#    listener()
-
-#def talker():
-#    pub = rospy.Publisher('/joint_out', JointState, queue_size=10) # The queue for display
-#    rospy.init_node('talker', anonymous=True) #name of the node
-#    rate = rospy.Rate(10) 
-#    while not rospy.is_shutdown():
-#        joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (velocity, position)
-#        rospy.loginfo(joint_out)
-#        pub.publish(joint_out)
-#        rate.sleep()
-
-#if __name__ == '__main__':
-#    try:
-#        talker()
-#    except rospy.ROSInterruptException:
-#        pass
-
-
-#!/usr/bin/env python
-#import rospy
-#from std_msgs.msg import String
-
-#def callback(data):
-#    rospy.loginfo(rospy.get_caller_id() + "%s", data.data)
-    
-#def listener():
-
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # node are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
-#    rospy.init_node('listener', anonymous=True)
-
-#    rospy.Subscriber("chatter", String, callback)
-
-    # spin() simply keeps python from exiting until this node is stopped
-#    rospy.spin()
-
-#if __name__ == '__main__':
-#    listener()
