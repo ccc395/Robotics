@@ -39,14 +39,22 @@
 #!/usr/bin/env python
 # license removed for brevity
 import rospy
+from Header import header
 from std_msgs.msg import String
+from std_msgs.msg import msg.state_a.data
+from std_msgs.msg import msg.state_b.data
+import sys
+
+#Header header
+#std_msgs/Bool state_a
+#std_msgs/Bool state_b
 
 def talker():
-    pub = rospy.Publisher('/encoder_in', String, queue_size=10) # The queue for display
+    pub = rospy.Publisher('/encoder_in', Bool, queue_size=10) # The queue for display
     rospy.init_node('talker', anonymous=True) #name of the node
     rate = rospy.Rate(10) 
     while not rospy.is_shutdown():
-        hello_str = "hello world %s" % rospy.get_time()
+        hello_str = "%s" % rospy.get_time()
         rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
