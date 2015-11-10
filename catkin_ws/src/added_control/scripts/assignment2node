@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import Bool
+from std_msgs.msg import msg.state_a.data
+from std_msgs.msg import msg.state_b.data
+import sys
+import quadrature
+
+
+def change(data):    
+#    std_msgs/Bool state_a
+#    std_msgs/Bool state_b     << as defined in khan_msgs
+    a_state = Bool state_a.data
+    b_state = Bool state_b.data
+    # calculates the position and velocity using the quadrature.py file
+    quadrature.update(a_state, b_state)
+def mynode():
+    rospy.init_node('mynode', anonymous=True)
+    #subscribes to the "ticks" topic for the Bool type (boolean) and executes change function
+    rospy.Subscriber("/ticks", Bool, change)
+    #publishes to joint_out of type JointState
+    pub = rospy.Publisher('/joint_out', JointState, queue_size=10) # The queue for display
+    rate = rospy.Rate(10) 
+    while not rospy.is_shutdown():
+        #will publish:
+        #Velocity: -- (some number)
+        #Position: -- (some number)
+        #where the velocity and position numbers are determined by the quadrature values quadrature._velocity and quadrature._position
+        joint_out = "Velocity: %d \n Position: %d \n" % rospy.get_time() (quadrature._velocity, quadrature._position)
+        pub.publish(joint_out)
+        rate.sleep()
+        rospy.spin()
+if __name__ == '__main__':
+    try:
+        change()
+    except rospy.ROSInterruptException:
+        pass
+
