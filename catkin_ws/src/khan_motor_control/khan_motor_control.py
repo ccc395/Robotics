@@ -10,7 +10,10 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import String
 
 # Create variable so we can always see/use it, but set it to a value that indicates it's not yet valid
-pub = None
+pub_front_left = None
+pub_front_right = None
+pub_back_left = None
+pub_back_right = None
 
 #Function which is called every time a JointState is received, if the Subscriber is set up to use this function
 def js_call(data):
@@ -28,13 +31,19 @@ def js_call(data):
 if __name__ == '__main__':
   try:
     #Initialize node
-    rospy.init_node('this_node')
+    rospy.init_node('motor_command')
     # Declare we are using the pub defined above, not a new local variable
     global pub
     #Create publisher, to send out a String with the first joint name of every received message as an example.
-    pub = rospy.Publisher('names', String, queue_size=10)
+    pub_enc_front_left = rospy.Publisher('/py_controller/front_left_wheel/cmd', String, queue_size=10)
+    pub_enc_front_right = rospy.Publisher('/py_controller/front_right_wheel/cmd', String, queue_size=10)
+    pub_enc_back_left = rospy.Publisher('/py_controller/back_left_wheel/cmd', String, queue_size=10)
+    pub_enc_back_right = rospy.Publisher('/py_controller/back_right_wheel/cmd', String, queue_size=10)
     #Create subscriber, and tell it to call js_call() whenever a message is received
-    sub = rospy.Subscriber('topic_name', JointState, js_call)
+    sub_front_left = rospy.Subscriber('/py_controller/front_left_wheel/encoder', JointState, js_call)
+    sub_front_right = rospy.Subscriber('/py_controller/front_right_wheel/encoder', JointState, js_call)
+    sub_back_left = rospy.Subscriber('/py_controller/back_left_wheel/encoder', JointState, js_call)
+    sub_back_right = rospy.Subscriber('/py_controller/back_right_wheel/encoder', JointState, js_call)
 
     #We need to wait for new messages
     rospy.spin()
