@@ -35,15 +35,15 @@ if __name__ == '__main__':
     # Declare we are using the pub defined above, not a new local variable
     global pub
     #Create publisher, to send out a String with the first joint name of every received message as an example.
-    pub_enc_front_left = rospy.Publisher('/py_controller/front_left_wheel/cmd', String, queue_size=10)
-    pub_enc_front_right = rospy.Publisher('/py_controller/front_right_wheel/cmd', String, queue_size=10)
-    pub_enc_back_left = rospy.Publisher('/py_controller/back_left_wheel/cmd', String, queue_size=10)
-    pub_enc_back_right = rospy.Publisher('/py_controller/back_right_wheel/cmd', String, queue_size=10)
+    pub_enc_front_left = rospy.Publisher('/py_controller/front_left/cmd', String, queue_size=10)
+    pub_enc_front_right = rospy.Publisher('/py_controller/front_right/cmd', String, queue_size=10)
+    pub_enc_back_left = rospy.Publisher('/py_controller/back_left/cmd', String, queue_size=10)
+    pub_enc_back_right = rospy.Publisher('/py_controller/back_right/cmd', String, queue_size=10)
     #Create subscriber, and tell it to call js_call() whenever a message is received
-    sub_front_left = rospy.Subscriber('/py_controller/front_left_wheel/encoder', JointState, js_call)
-    sub_front_right = rospy.Subscriber('/py_controller/front_right_wheel/encoder', JointState, js_call)
-    sub_back_left = rospy.Subscriber('/py_controller/back_left_wheel/encoder', JointState, js_call)
-    sub_back_right = rospy.Subscriber('/py_controller/back_right_wheel/encoder', JointState, js_call)
+    sub_front_left = rospy.Subscriber('/py_controller/front_left/encoder', JointState, js_call)
+    sub_front_right = rospy.Subscriber('/py_controller/front_right/encoder', JointState, js_call)
+    sub_back_left = rospy.Subscriber('/py_controller/back_left/encoder', JointState, js_call)
+    sub_back_right = rospy.Subscriber('/py_controller/back_right/encoder', JointState, js_call)
 
     #We need to wait for new messages
     rospy.spin()
