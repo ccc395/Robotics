@@ -113,12 +113,6 @@ def motorcommand():
  
 # FOLLOWING PART OF THE FUNCTION IS SUBSCRIBED TO TIME AND CALLS ENCODER-BASED FUNCTIONS, COMMENTED OUT BECAUSE OF LACK OF ENCODER
 
-#    rospy.Subscriber('leftencoder_out', Quadrature, callbackleft)
-
-    #calls updater for left encoder
-#    if GPIO.event_detected("P9_23") or GPIO.event_detected("P9_24"):
-#  		rospy.Subscriber('/Clock', Clock, leftencoder)
-
 
     rospy.spin()
 
