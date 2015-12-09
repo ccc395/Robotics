@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # This is a ROS node designed to command the motors of KHAN and read the corresponding encoder data
-# Author: Thomas Schluszas <tms2874@vt.edu>
+# Author: Chris Corbett <ccc395@vt.edu>
 
 # Imports
 #commented out unecessary imports since we are not implementing encoder
