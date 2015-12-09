@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # This is a ROS node designed to command the motors of KHAN and read the corresponding encoder data
-# Author: Thomas Schluszas <tms2874@vt.edu>
+# Author: Chris Corbett <ccc395@vt.edu>
 
 # Imports
 #commented out unecessary imports since we are not implementing encoder
@@ -30,12 +30,6 @@ GPIO.setup("P9_15", GPIO.OUT)
 GPIO.setup("P8_10", GPIO.OUT)
 GPIO.setup("P8_11", GPIO.OUT)
 
-#GPIO.setup("P9_23", GPIO.IN)
-#GPIO.setup("P9_24", GPIO.IN)
-#GPIO.add_event_detect("P9_23", GPIO.BOTH)
-#GPIO.add_event_detect("P9_24", GPIO.BOTH)
-
-#I AM PRINTING COMMANDS INSTEAD OF EXECUTING THEM, FOR DEMONSTRATION
 
 #controls front left wheel
 def frontleft(flcmd):
@@ -107,46 +101,6 @@ def rearright(rrcmd):
     GPIO.output("P8_11", GPIO.HIGH)  
 
 
-
-#FOLLOWING FUNCTION TAKES ENCODER DATA AND PUBLISHES JOINTSTATE, COMMENTED OUT BECAUSE I CANNOT GET ENCODER DATA WITHOUT FUNCTION ROBOT    
-
-#def callbackleft(data):
-    #Takes data from bag file and runs through update function
-#    quad.update(data.state_a.data, data.state_b.data, data.header.stamp.to_sec())
-#    pub = rospy.Publisher('joint_out', JointState)
-    #assigning values to JointState
-#    quadout = JointState()
-#    quadout.header.stamp = quad._time
-    #Assuming 1000/3 ticks per revolution
-#    quadout.position = (3/(2*pi*1000))*quad._position
-#    quadout.velocity = (3/(2*pi*1000))*quad._velocity
-    #Final publish of JointState
-#    rospy.loginfo(quadout)
-#    pub.publish(quadout)
-
-#FOLLOWING FUNCTION GENERATES QUADRATURE DATA FROM ENCODER READINGS, COMMENTED OUT BECAUSE I DON'T GET ENCODER READINGS
-
-#def leftencoder(time):
-	#gather encoder data
-#	if GPIO.input("P9_23"):
-#  		a = True
-#  	else:
-#  		a = False
-#  	if GPIO.input("P9_24"):
-#  		b = True
-#  	else:
-#  		b = False
-  	#assigns encoder values to Quadrature Data Type
-#  	leftenc = Quadrature()
-#  	leftenc.state_a.data = a
-#  	leftenc.state_b.data = b
-  	#getting time
-#  	t = time.secs + time.nsecs/(1000.0)
-#  	leftenc.header.stamp.to_sec() = t
-  	#publishing Quadrature data
-#  	pub = rospy.Publisher('leftencoder_out', Quadrature)
-#	rospy.loginfo(leftenc)
-#    pub.publish(leftenc)
 
 
 #subscribes to controller messages and calls functions that actually command wheels
