@@ -6,16 +6,9 @@
 #commented out unecessary imports since we are not implementing encoder
 import rospy
 from sensor_msgs.msg import JointState
-#from std_msgs.msg import String
-#from khan_msgs.msg import Quadrature
-#from rosgraph_msgs import Clock
-#import quadrature
+
 import Adafruit_BBIO.GPIO as GPIO
 import Adafruit_BBIO.PWM as PWM
-#from math import pi
-
-
-#quad = quadrature.QuadratureEstimator(1000.0/3)
 
 #frontleft
 GPIO.setup("P9_12", GPIO.OUT)
