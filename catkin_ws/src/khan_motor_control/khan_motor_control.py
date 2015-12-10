@@ -40,7 +40,7 @@ if __name__ == '__main__':
     pub_enc_back_left = rospy.Publisher('/py_controller/back_left/cmd', String, queue_size=10)
     pub_enc_back_right = rospy.Publisher('/py_controller/back_right/cmd', String, queue_size=10)
     #Create subscriber, and tell it to call js_call() whenever a message is received
-    sub_front_left = rospy.Subscriber('/py_controller/front_left/encoder', JointState, js_call)
+    sub_front_left = rospy.Subscriber('/py_controller/front_left/cmd', JointState, js_call)
     sub_front_right = rospy.Subscriber('/py_controller/front_right/encoder', JointState, js_call)
     sub_back_left = rospy.Subscriber('/py_controller/back_left/encoder', JointState, js_call)
     sub_back_right = rospy.Subscriber('/py_controller/back_right/encoder', JointState, js_call)

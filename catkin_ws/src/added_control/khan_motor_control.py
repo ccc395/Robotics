@@ -36,9 +36,8 @@ if __name__ == '__main__':
     global pub
     #Create publisher, to send out a String with the first joint name of every received message as an example.
     pub_enc_front_left = rospy.Publisher('names', String, queue_size=10)
-    pub_enc_front_right = rospy.Publisher('names', String, queue_size=10)
-    pub_enc_back_left = rospy.Publisher('names', String, queue_size=10)
-    pub_enc_back_right = rospy.Publisher('names', String, queue_size=10)
+    pub_enc_front_left = rospy.Publisher('names', String, queue_size=10)
+
     #Create subscriber, and tell it to call js_call() whenever a message is received
     sub_front_left = rospy.Subscriber('/py_controller/front_left_wheel/cmd', JointState, js_call)
     sub_front_right = rospy.Subscriber('/py_controller/front_right_wheel/cmd', JointState, js_call)
